@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meet Our Team</title>
+    <link rel="stylesheet" href="assignment4.css">
+    <style>
+        body.light-mode {
+            background-color: #ffffff;
+            color: #000000;
+            font-family: Arial, sans-serif;
+        }
+        body.dark-mode {
+            background-color: #333333;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #333;
+        }
+        .theme-switcher {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .theme-switcher:hover {
+            background-color: #0056b3;
+        }
+        .input-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .input-section input {
+            padding: 10px;
+            margin-right: 10px;
+        }
+        .input-section button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .input-section button:hover {
+            background-color: #218838;
+        }
+        #welcomeMessage {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .quote {
+            margin: 20px auto;
+            font-size: 1.2em;
+            font-style: italic;
+            text-align: center;
+        }
+        .quote button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #ffc107;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .quote button:hover {
+            background-color: #e0a800;
+        }
+        .team-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .team-member {
+            background-color: #f8f9fa;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #f8f9fa;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body class="light-mode" onload="generateQuote()">
+    <header>
+        <h1>Meet Our Team</h1>
+        <button class="theme-switcher" onclick="toggleTheme()">Switch to Dark Mode</button>
+    </header>
+    <main>
+        <div class="input-section">
+            <label for="username">Enter your name:</label>
+            <input type="text" id="username" name="username">
+            <button onclick="greetUser()">Submit</button>
+        </div>
+        <h2 id="welcomeMessage">Welcome to my webpage!</h2>
+        
+        <div class="quote" id="quoteDisplay"></div>
+        <div class="quote">
+            <button onclick="generateQuote()">Get Profile Description</button>
+        </div>
+
+        <div class="team-container">
+            <div class="team-member">
+                <img src="/images/Abdulfatah.jpg" alt="Team Member" class="profile-image">
+                <h2>Abdulfutah Ali</h2>
+                <p>I love reading novels and playing games.</p>
+            </div>
+            <div class="team-member">
+                <img src="/images/KeithS.jpg" alt="Team Member" class="profile-image">
+                <h2>Keith Samoita</h2>
+                <p>I'm 18 and I love listening to music.</p>
+            </div>
+            <div class="team-member">
+                <img src="/images/Machariambugua.jpg" alt="Team Member" class="profile-image">
+                <h2>Macharia Mbugua</h2>
+                <p>Love working out and sketching.</p>
+            </div>
+            <div class="team-member">
+                <img src="/images/Wilsonmuriuki.jpg" alt="Team Member" class="profile-image">
+                <h2>Wilson Muriuki</h2>
+                <p>I love drawing and sports.</p>
+            </div>
+            <div class="team-member">
+                <img src="/images/KeithK.jpg" alt="Team Member" class="profile-image">
+                <h2>Keith Kimani</h2>
+                <p>I enjoy cycling and video games.</p>
+            </div>
+            <div class="team-member">
+                <img src="/images/lisa.jpg" alt="Team Member" class="profile-image">
+                <h2>Lisa Ndungu</h2>
+                <p>I like reading fiction books and listening to music.</p>
+            </div>
+        </div>
+    </main>
+    <footer>Created by team programmers</footer>
+
+    <script>
+        function greetUser() {
+            var name = document.getElementById('username').value;
+            var welcomeMessage = document.getElementById('welcomeMessage');
+            welcomeMessage.textContent = 'Welcome to my webpage, ' + name + '!';
+        }
+
+        function toggleTheme() {
+            var body = document.body;
+            var button = document.querySelector('.theme-switcher');
+
+            if (body.classList.contains('light-mode')) {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                button.textContent = 'Switch to Light Mode';
+            } else {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                button.textContent = 'Switch to Dark Mode';
+            }
+        }
+
+        function generateQuote() {
+            var profiles = [
+                "I love reading novels and playing games. - Abdulfutah Ali",
+                "I'm 18 and I love listening to music. - Keith Samoita",
+                "Love working out and sketching. - Macharia Mbugua",
+                "I love drawing and sports. - Wilson Muriuki",
+                "I enjoy cycling and video games. - Keith Kimani",
+                "I like reading fiction books and listening to music. - Lisa Ndungu"
+            ];
+            var randomIndex = Math.floor(Math.random() * profiles.length);
+            document.getElementById('quoteDisplay').textContent = profiles[randomIndex];
+        }
+    </script>
+</body>
+</html>

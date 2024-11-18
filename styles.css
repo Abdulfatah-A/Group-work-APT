@@ -1,0 +1,289 @@
+/* Icons */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('todolistimage.jpg') no-repeat center center/cover;
+    color: white;
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
+
+/* Header Styles */
+header {
+    background-color: #2F4F4F; /* Dark Slate Gray for a gritty look */
+    color: white;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    background-color: #3d3d3d;
+    color: #ffeb3b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Main Content Styles */
+main {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    color: black;
+    position: relative;
+    z-index: 1;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+/* To-Do Input Section Styles */
+#todo-input, #due-date, #category-select {
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(33% - 15px);
+}
+
+#add-todo {
+    padding: 10px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#add-todo:hover {
+    background: #218838;
+}
+
+#add-todo i {
+    margin-right: 5px;
+}
+
+/* To-Do List Output Section */
+#todo-output-section {
+    margin-top: 20px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    color: black;
+}
+
+#todo-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#todo-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#todo-list li:last-child {
+    border-bottom: none;
+}
+
+.task-text {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.task-text::before {
+    content: "\f274"; /* FontAwesome calendar icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 10px;
+    color: #007BFF;
+}
+
+.due-date {
+    margin-left: 20px;
+    font-weight: bold;
+    color: #555;
+}
+
+.category-text {
+    margin-left: 20px;
+    font-style: italic;
+    color: #007BFF;
+}
+
+/* Filter Buttons Styles */
+.filter-buttons {
+    margin: 10px 0;
+}
+
+.filter-buttons button {
+    margin-right: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.filter-buttons button:hover {
+    background-color: #0056b3;
+}
+
+/* Completion Meter Styles */
+meter {
+    appearance: none;
+    width: 100%;
+    height: 20px;
+    border-radius: 10px;
+    background: #e0e0e0;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+meter::-webkit-meter-bar {
+    background: #e0e0e0;
+    border-radius: 10px;
+}
+
+meter::-webkit-meter-optimum-value {
+    background: linear-gradient(to right, #76c7c0, #4ca3a3);
+    border-radius: 10px;
+}
+
+meter::-webkit-meter-suboptimum-value {
+    background: linear-gradient(to right, #e0e0e0, #c0c0c0);
+    border-radius: 10px;
+}
+
+meter::-webkit-meter-even-less-good-value {
+    background: linear-gradient(to right, #ff6b6b, #d9534f);
+    border-radius: 10px;
+}
+
+#completion-text {
+    font-weight: bold;
+    color: #007BFF;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Footer Styles */
+footer {
+    background: #222;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    margin: 10px;
+    flex: 1;
+    min-width: 200px;
+    padding: 20px;
+    background: #333;
+    border-radius: 8px;
+}
+
+.footer-section h3 {
+    margin-top: 0;
+    border-bottom: 2px solid #28a745;
+    padding-bottom: 5px;
+}
+
+.footer-section p, .footer-section ul {
+    margin: 5px 0;
+}
+
+.footer-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin: 5px 0;
+}
+
+.footer-section a {
+    color: #61dafb;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}

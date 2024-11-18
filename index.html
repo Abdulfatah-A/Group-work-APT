@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Modern Website with To-Do List</title>
+    <meta name="description" content="A clean modern website featuring a to-do list application.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header role="banner">
+        <h1>Personal To-do list</h1>
+        <nav role="navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="chatbot.html">Chatbot</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main role="main">
+        <section id="todo-section">
+            <h2>Add a New Task</h2>
+            <label for="todo-input">Task:</label>
+            <input type="text" id="todo-input" placeholder="Add a new task..." required>
+            
+            <label for="due-date">Due Date:</label>
+            <input type="date" id="due-date" placeholder="Due Date" required>
+            
+            <label for="category-select">Category:</label>
+            <select id="category-select">
+                <option value="Work">Work</option>
+                <option value="Personal">Personal</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Fitness">Fitness</option>
+                <option value="Other">Other</option>
+            </select>
+            <button id="add-todo"><i class="fa fa-plus"></i> Add</button>
+        </section>
+        
+        <section id="todo-output-section">
+            <h2>Your To-Do List</h2>
+            <div class="filter-buttons">
+                <button id="show-all">Show All</button>
+                <button id="show-completed">Show Completed</button>
+                <button id="show-pending">Show Pending</button>
+            </div>
+            <ul id="todo-list"></ul>
+            <meter id="completion-meter" min="0" max="100" value="0" style="width: 100%;"></meter>
+            <p id="completion-text">Completion: 0%</p>
+        </section>
+        
+    </main>
+    
+    <footer role="contentinfo">
+        <div class="footer-container">
+            <div class="footer-section about-section">
+                <h3>About</h3>
+                <p>This is a simple to-do list to help you improve your planning.</p>
+            </div>
+            <div class="footer-section contact-section">
+                <h3>Contact</h3>
+                <p>
+                    Personal Email: <a href="mailto:abdulfatahmohammedalis@gmail.com">Click Here!</a><br>
+                    Official Email: <a href="mailto:abdulfatahm@usiu.ac.ke.com">Click Here!</a>
+                </p>
+            </div>
+            <div class="footer-section follow-us-section">
+                <h3>Follow Us</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <p>&copy; APT-USIU class project all rights reserved</p>
+    </footer>
+    
+    
+    
+
+    <script src="script.js" defer></script>
+</body>
+</html>
