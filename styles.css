@@ -94,12 +94,19 @@ h2 {
 }
 
 /* To-Do Input Section Styles */
-#todo-input, #due-date, #category-select {
+input[type="text"], input[type="date"], select {
     padding: 10px;
-    margin-right: 10px;
+    margin: 5px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: calc(33% - 15px);
+    width: calc(100% - 22px);
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="date"]:focus, select:focus {
+    border-color: #007BFF;
+    outline: none;
 }
 
 #add-todo {
@@ -121,6 +128,26 @@ h2 {
 }
 
 /* To-Do List Output Section */
+.todo-list-heading {
+    text-align: center;
+    font-size: 2rem; /* Larger font size for better visibility */
+    font-weight: bold;
+    color: #007BFF; /* A pleasant blue color */
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.todo-list-heading::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background-color: #007BFF;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
 #todo-output-section {
     margin-top: 20px;
     padding: 10px;
@@ -136,15 +163,17 @@ h2 {
 }
 
 #todo-list li {
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: white;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-#todo-list li:last-child {
-    border-bottom: none;
+#todo-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .task-text {
@@ -195,34 +224,34 @@ h2 {
 
 /* Completion Meter Styles */
 meter {
-    appearance: none;
     width: 100%;
-    height: 20px;
-    border-radius: 10px;
+    height: 24px;
+    border-radius: 12px;
     background: #e0e0e0;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 meter::-webkit-meter-bar {
     background: #e0e0e0;
-    border-radius: 10px;
+    border-radius: 12px;
 }
 
 meter::-webkit-meter-optimum-value {
-    background: linear-gradient(to right, #76c7c0, #4ca3a3);
-    border-radius: 10px;
+    background: linear-gradient(90deg, #76c7c0, #4ca3a3);
+    border-radius: 12px;
+    transition: width 0.5s ease-in-out;
 }
 
 meter::-webkit-meter-suboptimum-value {
-    background: linear-gradient(to right, #e0e0e0, #c0c0c0);
-    border-radius: 10px;
+    background: linear-gradient(90deg, #ffeb3b, #ffeb3b);
+    border-radius: 12px;
 }
 
 meter::-webkit-meter-even-less-good-value {
-    background: linear-gradient(to right, #ff6b6b, #d9534f);
-    border-radius: 10px;
+    background: linear-gradient(90deg, #ff6b6b, #d9534f);
+    border-radius: 12px;
 }
 
 #completion-text {
@@ -230,17 +259,19 @@ meter::-webkit-meter-even-less-good-value {
     color: #007BFF;
     margin-top: 10px;
     text-align: center;
+    font-size: 1.2rem;
 }
 
 /* Footer Styles */
 footer {
-    background: #222;
+    background: linear-gradient(to right, #2f4f4f, #4c4c4c); 
     color: white;
-    padding: 40px 20px;
+    padding: 20px 0;
     text-align: center;
     position: relative;
     bottom: 0;
     width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .footer-container {
@@ -264,6 +295,7 @@ footer {
     margin-top: 0;
     border-bottom: 2px solid #28a745;
     padding-bottom: 5px;
+    color: #ffeb3b;
 }
 
 .footer-section p, .footer-section ul {
@@ -282,8 +314,537 @@ footer {
 .footer-section a {
     color: #61dafb;
     text-decoration: none;
+    transition: color 0.3s;
 }
 
 .footer-section a:hover {
-    text-decoration: underline;
+    color: #21a1f1;
 }
+
+/* Subtle Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#todo-list li, #completed-list li, button {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Complete and Delete Button Styles */
+.complete-btn, .delete-btn {
+    padding: 8px 12px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4}
+/* Add a New Task Card */
+.todo-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.todo-card h2 {
+    color: #007BFF;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.todo-card label {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+.todo-card input[type="text"], .todo-card input[type="date"], .todo-card select {
+    padding: 12px;
+    width: calc(100% - 24px);
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.todo-card input[type="text"]:focus, .todo-card input[type="date"]:focus, .todo-card select:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+.todo-card button {
+    padding: 12px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.todo-card button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.todo-card button i {
+    margin-right: 8px;
+}
+/* Highlight Active Navigation Link */
+nav ul li a.active {
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+}
+
+/* Center and Style Iframe */
+.iframe-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+iframe {
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+}
+
+/* Enhance the Chatbot Section Header */
+#chatbot-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+/* Ensure Footer Consistency */
+footer {
+    background: linear-gradient(to right, #2f4f4f, #4c4c4c);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.footer-section h3 {
+    color: #ffeb3b;
+    margin-bottom: 10px;
+}
+
+.footer-section a {
+    color: #61dafb;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: #21a1f1;
+}
+/* Highlight Active Navigation Link */
+nav ul li a.active {
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+}
+
+/* Add a New Task Card */
+.todo-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.todo-card h2 {
+    color: #007BFF;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.todo-card label {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+.todo-card input[type="text"], .todo-card input[type="date"], .todo-card select {
+    padding: 12px;
+    width: calc(100% - 24px);
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.todo-card input[type="text"]:focus, .todo-card input[type="date"]:focus, .todo-card select:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+.todo-card button {
+    padding: 12px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.todo-card button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.todo-card button i {
+    margin-right: 8px;
+}
+
+/* Center and Style Iframe */
+.iframe-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+iframe {
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+}
+
+/* Enhance the Chatbot Section Header */
+#chatbot-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+/* Center and Style Team Member Section */
+.team-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.team-member {
+    background-color: white;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.team-member img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Ensure Footer Consistency */
+footer {
+    background: linear-gradient(to right, #2f4f4f, #4c4c4c);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.footer-section h3 {
+    color: #ffeb3b;
+    margin-bottom: 10px;
+}
+
+.footer-section a {
+    color: #61dafb;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: #21a1f1;
+}
+
+/* Subtle Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+#todo-list li, #completed-list li, button {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Complete and Delete Button Styles */
+.complete-btn, .delete-btn {
+    padding: 8px 12px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.complete-btn {
+    background-color: #28a745;
+}
+
+.complete-btn:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.delete-btn {
+    background-color: #dc3545;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+/* Highlight Active Navigation Link */
+nav ul li a.active {
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+}
+
+/* Center and Style Team Member Section */
+.team-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.team-member {
+    background-color: white;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+}
+
+.team-member img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Ensure Footer Consistency */
+footer {
+    background: linear-gradient(to right, #2f4f4f, #4c4c4c);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.footer-section h3 {
+    color: #ffeb3b;
+    margin-bottom: 10px;
+}
+
+.footer-section a {
+    color: #61dafb;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: #21a1f1;
+}
+/* Highlight Active Navigation Link */
+nav ul li a.active {
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+}
+
+/* Add a New Task Card */
+.todo-card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.todo-card h2 {
+    color: #007BFF;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+.todo-card label {
+    display: block;
+    font-weight: bold;
+    margin: 10px 0 5px;
+    color: #333;
+}
+
+.todo-card input[type="text"], .todo-card input[type="date"], .todo-card select {
+    padding: 12px;
+    width: calc(100% - 24px);
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+.todo-card input[type="text"]:focus, .todo-card input[type="date"]:focus, .todo-card select:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+.todo-card button {
+    padding: 12px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.todo-card button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.todo-card button i {
+    margin-right: 8px;
+}
+
+/* Center and Style Iframe */
+.iframe-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0;
+}
+
+iframe {
+    border: 2px solid #007BFF;
+    border-radius: 8px;
+}
+
+/* Enhance the Chatbot Section Header */
+#chatbot-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #007BFF;
+    margin-bottom: 20px;
+}
+
+/* Center and Style Team Member Section */
+.team-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.team-member {
+    background-color: white;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    float: left; /* Ensure profiles float next to each other */
+}
+
+.team-member img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Ensure Footer Consistency */
+footer {
+    background: linear-gradient(to right, #2f4f4f, #4c4c4c);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    clear: both; /* Clear floating elements */
+}
+
+.footer-section h3 {
+    color: #ffeb3b;
+    margin-bottom: 10px;
+}
+
+.footer-section a {
+    color: #61dafb;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: #21a1f1;
+}
+/* Interactive Hover Effects */
+button, a {
+    transition: all 0.3s ease;
+}
+
+button:hover, a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Subtle Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+main, .team-container, .iframe-container {
+    animation: fadeIn 0.5s ease-in-out;
+}
+

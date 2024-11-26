@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot - My Clean Modern Website</title>
+    <title>Chatbot</title>
     <meta name="description" content="A clean modern website featuring a chatbot application.">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header role="banner">
-        <h1>Chatbot page</h1>
+        <h1>Chatbot</h1>
         <nav role="navigation">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="chatbot.html">Chatbot</a></li>
+                <li><a href="chatbot.html" class="active">Chatbot</a></li>
                 <li><a href="about.html">About Us</a></li>
             </ul>
         </nav>
@@ -22,15 +22,8 @@
     <main role="main">
         <section id="chatbot-section">
             <h2>Chat with Our Bot</h2>
-            <div class="chatbot-container">
-                <!-- Dialogflow Web Demo Integration Code -->
-                <iframe
-                    allow="microphone;"
-                    width="350"
-                    height="430"
-                    src="https://console.dialogflow.com/api-client/demo/embedded/5119d55d-5e0e-4555-a2c4-8b2ad7b6f66a">
-</iframe>
-      
+            <div class="iframe-container">
+                <iframe allow="microphone;" width="350" height="430" src="https://console.dialogflow.com/api-client/demo/embedded/5119d55d-5e0e-4555-a2c4-8b2ad7b6f66a"></iframe>
             </div>
         </section>
     </main>
@@ -57,7 +50,7 @@
                 </ul>
             </div>
         </div>
-        <p>&copy; APT-USIU class project all rights reserved</p>
+        <p>&copy; APT-USIU class project</p>
     </footer>
 </body>
 </html>

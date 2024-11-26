@@ -20,14 +20,14 @@
     </header>
     
     <main role="main">
-        <section id="todo-section">
+        <section id="todo-section" class="todo-card">
             <h2>Add a New Task</h2>
             <label for="todo-input">Task:</label>
             <input type="text" id="todo-input" placeholder="Add a new task..." required>
-            
+        
             <label for="due-date">Due Date:</label>
             <input type="date" id="due-date" placeholder="Due Date" required>
-            
+        
             <label for="category-select">Category:</label>
             <select id="category-select">
                 <option value="Work">Work</option>
@@ -39,8 +39,9 @@
             <button id="add-todo"><i class="fa fa-plus"></i> Add</button>
         </section>
         
+        
         <section id="todo-output-section">
-            <h2>Your To-Do List</h2>
+            <h2 class="todo-list-heading">Your To-Do List</h2>
             <div class="filter-buttons">
                 <button id="show-all">Show All</button>
                 <button id="show-completed">Show Completed</button>
@@ -75,12 +76,9 @@
                 </ul>
             </div>
         </div>
-        <p>&copy; APT-USIU class project all rights reserved</p>
+        <p>&copy; APT-USIU class project</p>
     </footer>
     
-    
-    
-
     <script src="script.js" defer></script>
 </body>
 </html>

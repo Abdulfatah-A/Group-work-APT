@@ -12,7 +12,12 @@
     const completionText = document.getElementById('completion-text');
     const filterButtons = document.querySelectorAll('.filter-buttons button');
 
-    // Function to change background color
+    let completedTasksList = []; // Array to store completed tasks
+
+    document.addEventListener('DOMContentLoaded', () => {
+        loadTasksFromLocalStorage();
+    });
+
     function changeBackgroundColor() {
         const colors = [
             '#e0f7fa', '#b2ebf2', '#80deea',
@@ -27,18 +32,19 @@
         }, 3000);
     }
 
-    // Call the function to start the background color animation
     changeBackgroundColor();
 
     function addTask(todoText, dueDate, category) {
-        const li = createTaskElement(todoText, dueDate, category);
+        const task = { todoText, dueDate, category, completed: false };
+        const li = createTaskElement(task);
         todoList.appendChild(li);
         totalTasks++;
         updateCompletionMeter();
         clearInputs();
+        saveTasksToLocalStorage(); // Save to local storage
     }
 
-    function createTaskElement(todoText, dueDate, category) {
+    function createTaskElement({ todoText, dueDate, category, completed }) {
         const li = document.createElement('li');
         li.classList.add('task-item');
 
@@ -54,33 +60,37 @@
         categorySpan.textContent = category;
         categorySpan.classList.add('category-text');
 
-        const completeButton = createButton('Complete', 'green', () => {
+        const completeButton = createButton('Complete', 'complete-btn', () => {
             completedTasks++;
             updateCompletionMeter();
-            li.style.textDecoration = 'line-through';
-            completeButton.disabled = true;
+            completedTasksList.push(li);
+            li.remove();
+            saveTasksToLocalStorage();
             filterTasks(currentFilter);
         });
 
-        const deleteButton = createButton('Delete', 'red', () => {
+        const deleteButton = createButton('Delete', 'delete-btn', () => {
             li.remove();
             totalTasks--;
             updateCompletionMeter();
+            saveTasksToLocalStorage();
             filterTasks(currentFilter);
         });
 
         li.append(taskSpan, dateSpan, categorySpan, completeButton, deleteButton);
+        if (completed) {
+            completedTasks++;
+            li.remove();
+            completedTasksList.push(li);
+        }
         return li;
     }
 
-    function createButton(text, color, clickHandler) {
+    function createButton(text, className, clickHandler) {
         const button = document.createElement('button');
         button.textContent = text;
+        button.classList.add(className);
         button.style.marginLeft = '10px';
-        button.style.background = color;
-        button.style.color = 'white';
-        button.style.border = 'none';
-        button.style.cursor = 'pointer';
         button.addEventListener('click', clickHandler);
         return button;
     }
@@ -100,13 +110,60 @@
     function filterTasks(filter) {
         const tasks = document.querySelectorAll('#todo-list .task-item');
         tasks.forEach(task => {
-            const isCompleted = task.querySelector('button[style*="green"]').disabled;
+            const isCompleted = completedTasksList.includes(task);
             if (filter === 'all' || (filter === 'completed' && isCompleted) || (filter === 'pending' && !isCompleted)) {
                 task.style.display = '';
             } else {
                 task.style.display = 'none';
             }
         });
+
+        completedTasksList.forEach(task => {
+            if (filter === 'completed') {
+                task.style.display = '';
+                todoList.appendChild(task); // Append to the list temporarily to show completed tasks
+            } else {
+                task.style.display = 'none';
+                task.remove(); // Remove from the list when not in 'Show Completed' filter
+            }
+        });
+    }
+
+    function saveTasksToLocalStorage() {
+        const tasks = [];
+        document.querySelectorAll('#todo-list .task-item').forEach(taskItem => {
+            const task = {
+                todoText: taskItem.querySelector('.task-text').textContent,
+                dueDate: taskItem.querySelector('.due-date').textContent,
+                category: taskItem.querySelector('.category-text').textContent,
+                completed: false
+            };
+            tasks.push(task);
+        });
+        completedTasksList.forEach(taskItem => {
+            const task = {
+                todoText: taskItem.querySelector('.task-text').textContent,
+                dueDate: taskItem.querySelector('.due-date').textContent,
+                category: taskItem.querySelector('.category-text').textContent,
+                completed: true
+            };
+            tasks.push(task);
+        });
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+    function loadTasksFromLocalStorage() {
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        tasks.forEach(task => {
+            const li = createTaskElement(task);
+            if (task.completed) {
+                completedTasksList.push(li);
+            } else {
+                todoList.appendChild(li);
+                totalTasks++;
+            }
+        });
+        updateCompletionMeter();
     }
 
     addTodoButton.addEventListener('click', () => {
